@@ -1,10 +1,15 @@
+const ticker = document.getElementById("Ticker");
+const searchBarForm = document.getElementById("SearchBar");
 
-//const ctx = document.getElementById("Chart").getContext('2d');
-
+searchBarForm.addEventListener("submit", function(event){
+    event.preventDefault();
+    fetchData();
+});
 
 function fetchData(){
+    const userInput = document.getElementById("tickerName").value.toUpperCase().trim();
     const apiKey = "J3MLMOFOUP0RAV8S";
-    const link = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${apiKey}&datatype=json&outputsize=compact`;
+    const link = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}&datatype=json&outputsize=compact`;
 
     fetch(link)
         .then(response => {
@@ -15,11 +20,10 @@ function fetchData(){
         })
         .then(data => {
             const meta  = data["Meta Data"];
+            const symbol = meta["2. Symbol"];
             const timeSeries = data["Time Series (Daily)"];
             const timeSeries_arr = Object.keys(timeSeries); //returns an array from containing the various daye from the JSO. 
-            console.log(meta["2. Symbol"]);
+            ticker.textContent = symbol;
             console.log(timeSeries_arr[0]);
         });
 }
-
-fetchData();
