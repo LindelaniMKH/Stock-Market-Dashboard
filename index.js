@@ -1,5 +1,6 @@
 const ticker = document.getElementById("Ticker");
 const searchBarForm = document.getElementById("SearchBar");
+const points = 99;
 
 searchBarForm.addEventListener("submit", function(event){
     event.preventDefault();
@@ -24,6 +25,15 @@ function fetchData(){
             const timeSeries = data["Time Series (Daily)"];
             const timeSeries_arr = Object.keys(timeSeries); //returns an array from containing the various daye from the JSO. 
             ticker.textContent = symbol;
-            console.log(timeSeries_arr[0]);
+            
+           // console.log(timeSeries);
+
+            for (let i = 0; i < points; i++){
+                console.log(timeSeries_arr[i]);
+                var closingPrice = timeSeries[timeSeries_arr[i]]["4. close"];
+                //console.log(timeSeries[toString(timeSeries_arr[i])][ "4. close"]);
+                console.log(closingPrice);
+            }
+            //console.log(timeSeries_arr[0]);
         });
 }
