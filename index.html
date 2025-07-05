@@ -4,9 +4,9 @@
         <meta charset="UTF-8" , content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="index.css"/>
         <title>Stock Market Dashboard</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
-
         <form id="SearchBar">
             <input type="text" placeholder="Please enter a ticker" id="tickerName">
             <button type="submit">Search</button>
@@ -14,11 +14,13 @@
 
         <h1 id="Ticker"></h1>
 
-        <div class="Chart" id="PriceChart">
-            <canvas id="Chart" width="400" height="200"></canvas>
+        <div class="Chart">
+            <canvas id="PriceChart" width="400" height="200"></canvas>
+        </div>
+        <div class="Chart">
+            <canvas id="VolumeChart" width="400" height="200"></canvas>
         </div>
 
-        <script src="index.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="index.js"></script>
     </body>
 </html>

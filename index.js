@@ -1,10 +1,17 @@
 const ticker = document.getElementById("Ticker");
 const searchBarForm = document.getElementById("SearchBar");
+const priceChart = document.getElementById("PriceChart").getContext("2d");
+const volumeChart = document.getElementById("VolumeChart").getContext("2d");
 const points = 99;
+
+let prices = [];//An array that a given stocks prices
+let dates = [];//An array that holds a given stocks date
+let volume = [];//An array that holds a given stocks volume
 
 searchBarForm.addEventListener("submit", function(event){
     event.preventDefault();
     fetchData();
+    displayChartData();
 });
 
 function fetchData(){
@@ -23,17 +30,43 @@ function fetchData(){
             const meta  = data["Meta Data"];
             const symbol = meta["2. Symbol"];
             const timeSeries = data["Time Series (Daily)"];
-            const timeSeries_arr = Object.keys(timeSeries); //returns an array from containing the various daye from the JSO. 
+            const timeSeries_arr = Object.keys(timeSeries); //returns an array from containing the various dates from the JSO. 
             ticker.textContent = symbol;
             
            // console.log(timeSeries);
 
             for (let i = 0; i < points; i++){
-                console.log(timeSeries_arr[i]);
-                var closingPrice = timeSeries[timeSeries_arr[i]]["4. close"];
+                dates[i] = timeSeries_arr[i];
+                prices[i] = parseFloat(timeSeries[timeSeries_arr[i]]["4. close"]);
+                volume[i] = parseInt(timeSeries[timeSeries_arr[i]]["5. volume"]);
+                //var closingPrice = timeSeries[timeSeries_arr[i]]["4. close"];
                 //console.log(timeSeries[toString(timeSeries_arr[i])][ "4. close"]);
-                console.log(closingPrice);
+                //console.log(closingPrice);
             }
             //console.log(timeSeries_arr[0]);
         });
+}
+
+function displayChartData(){
+    const chart_price = new Chart(priceChart, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: "Price",
+                data: prices,
+         }]
+        }
+    });
+
+    const chart_volume = new Chart(volumeChart, {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: "Volume",
+                data: volume,
+            }]
+        }
+    });
 }
