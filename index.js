@@ -2,6 +2,7 @@ const ticker = document.getElementById("Ticker");
 const searchBarForm = document.getElementById("SearchBar");
 const priceChart = document.getElementById("PriceChart").getContext("2d");
 const volumeChart = document.getElementById("VolumeChart").getContext("2d");
+const description = document.getElementById("Description")
 const points = 99;
 
 let prices = [];//An array that a given stocks prices
@@ -17,9 +18,11 @@ searchBarForm.addEventListener("submit", function(event){
 function fetchData(){
     const userInput = document.getElementById("tickerName").value.toUpperCase().trim();
     const apiKey = "J3MLMOFOUP0RAV8S";
-    const link = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}&datatype=json&outputsize=compact`;
+    const apiKey_nd = "V4MR2GV2O6G4KI7T";
+    const timeSerieslink = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}&datatype=json&outputsize=compact`;
+    const overview_link = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${userInput}&apikey=${apiKey_nd}`;
 
-    fetch(link)
+    fetch(timeSerieslink)
         .then(response => {
             if(!response.ok){
                 throw new Error ("HTTPS error, unable to fetch data");
@@ -45,6 +48,17 @@ function fetchData(){
             }
             //console.log(timeSeries_arr[0]);
         });
+
+        fetch(overview_link)
+            .then(request => {
+                if(!request.ok){
+                    throw new Error ("HTTPS error, unable to fetch data");
+                }
+                return request.json();
+            })
+            .then(overview_data => {
+                description.textContent = overview_data["Description"];
+            })
 }
 
 function displayChartData(){
