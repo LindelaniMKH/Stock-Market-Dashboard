@@ -1,3 +1,8 @@
 #Text{
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.Ticker{
+    text-align: justify;
+    text-justify: inter-word;
+}

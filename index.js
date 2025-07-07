@@ -2,12 +2,18 @@ const ticker = document.getElementById("Ticker");
 const searchBarForm = document.getElementById("SearchBar");
 const priceChart = document.getElementById("PriceChart").getContext("2d");
 const volumeChart = document.getElementById("VolumeChart").getContext("2d");
-const description = document.getElementById("Description")
+const description = document.getElementById("Description");
+const divendendPerShare = document.getElementById("DivendendPerShare");
+const openPrice = document.getElementById("Open");
+const profitMargin = document.getElementById("ProfitMargin");
+const divendendYield = document.getElementById("DivendendYield");
 const points = 99;
 
 let prices = [];//An array that a given stocks prices
 let dates = [];//An array that holds a given stocks date
 let volume = [];//An array that holds a given stocks volume
+let chart_price = null;
+let chart_volume = null;
 
 searchBarForm.addEventListener("submit", function(event){
     event.preventDefault();
@@ -31,11 +37,25 @@ function fetchData(){
         })
         .then(data => {
             const meta  = data["Meta Data"];
+
+            if(!meta){
+                console.error("Meta Data not found! Response: ", data);
+                ticker.textContent = "Invalid Ticker or API limit reached.";
+                return;
+            }
+
             const symbol = meta["2. Symbol"];
             const timeSeries = data["Time Series (Daily)"];
+
+            if(!timeSeries){
+                console.error("Time Series datya not found: ",data);
+                return;
+            }
+
             const timeSeries_arr = Object.keys(timeSeries); //returns an array from containing the various dates from the JSO. 
+
             ticker.textContent = symbol;
-            
+           
            // console.log(timeSeries);
 
             for (let i = 0; i < points; i++){
@@ -58,11 +78,25 @@ function fetchData(){
             })
             .then(overview_data => {
                 description.textContent = overview_data["Description"];
+                profitMargin.textContent = `Profit Margin: ${overview_data["ProfitMargin"]}`;
+                divendendPerShare.textContent = `Divendend Per Share: ${overview_data["DividendPerShare"]}`;
+                divendendYield.textContent = `Divendend Yield: ${overview_data["DividendYield"]}`;
+
             })
 }
 
 function displayChartData(){
-    const chart_price = new Chart(priceChart, {
+    //Destroying the previous charts if they exist
+    if(chart_price){
+        chart_price.destroy();
+    }
+
+    if(chart_volume){
+        chart_volume.destroy();
+    }
+
+    //Creating new charts
+    chart_price = new Chart(priceChart, {
         type: 'line',
         data: {
             labels: dates,
@@ -73,7 +107,7 @@ function displayChartData(){
         }
     });
 
-    const chart_volume = new Chart(volumeChart, {
+    chart_volume = new Chart(volumeChart, {
         type: 'bar',
         data: {
             labels: dates,
