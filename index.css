@@ -1,8 +1,47 @@
+body{
+    background-color: #FCFCFC;
+    color: #303036;
+}
+
+button{
+    border-radius: 50px;
+    border: none;
+    color: gray;
+}
+
 #Text{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.Ticker{
+#Description{
     text-align: justify;
-    text-justify: inter-word;
+    width: 98%;
+}
+
+#tickerName{
+    font-size: 1rem;
+    border-radius: 50px;
+    border: none;
+    background-color: rgb(198, 197, 197);
+}
+
+.SearchBarSection{
+    margin: auto;
+    width: 25%;
+}
+
+.ChartSection{
+    display: flex;
+    flex-direction: column;
+}
+
+.Chart{
+    scale: 0.8;
+    padding-top: 0%;
+}
+
+.Container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

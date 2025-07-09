@@ -86,6 +86,8 @@ function fetchData(){
 }
 
 function displayChartData(){
+     Chart.defaults.elements.point.pointStyle = false;
+
     //Destroying the previous charts if they exist
     if(chart_price){
         chart_price.destroy();

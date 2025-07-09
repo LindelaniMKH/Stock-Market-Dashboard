@@ -7,10 +7,12 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
-        <form id="SearchBar">
-            <input type="text" placeholder="Please enter a ticker" id="tickerName">
-            <button type="submit">Search</button>
-        </form>
+        <div class="SearchBarSection">
+            <form id="SearchBar">
+                <input type="text" placeholder="Please enter a ticker" id="tickerName">
+                <button type="submit">Search</button>
+            </form>
+        </div>
 
         <h1 class="Text" id="Ticker"></h1>
 
@@ -18,11 +20,9 @@
             <p class="Text "id="Description"></p>
         </div>
 
-        <div class="Chart">
-            <canvas id="PriceChart" width="400" height="200"></canvas>
-        </div>
-        <div class="Chart">
-            <canvas id="VolumeChart" width="400" height="200"></canvas>
+        <div class="ChartSection">
+            <canvas class="Chart" id="PriceChart" width="200" height="100"></canvas>
+            <canvas class="Chart" id="VolumeChart" width="200" height="100"></canvas>
         </div>
 
         <div class="Container">
