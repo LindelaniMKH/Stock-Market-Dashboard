@@ -7,12 +7,18 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
-        <div class="SearchBarSection">
-            <form id="SearchBar">
-                <input type="text" placeholder="Please enter a ticker" id="tickerName">
-                <button type="submit">Search</button>
-            </form>
+        <div id="Header">
+            <div class="SearchBarSection">
+                <h2>TickerTrack</h2>
+                <div>
+                    <form id="SearchBar">
+                        <input type="text" placeholder="Please enter a ticker" id="tickerName">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
         </div>
+
 
         <h1 class="Text" id="Ticker"></h1>
 
@@ -21,15 +27,26 @@
         </div>
 
         <div class="ChartSection">
-            <canvas class="Chart" id="PriceChart" width="200" height="100"></canvas>
-            <canvas class="Chart" id="VolumeChart" width="200" height="100"></canvas>
+            <div class="ChartDiv">
+                <canvas class="Chart" id="PriceChart" width="200" height="100"></canvas>
+            </div>
+            <div class="ChartDiv">
+                <canvas class="Chart" id="VolumeChart" width="200" height="100"></canvas>
+            </div>
         </div>
 
-        <div class="Container">
-           <div id="DivendendPerShare"></div>
-           <div id="Open"></div>
-           <div id="ProfitMargin"></div>
-           <div id="DivendendYield"></div>
+        <div class="InfoSection">
+            <h2>Statistics and Financial Info.</h2>
+            <div class="Container">
+                <div id="DivendendPerShare"></div>
+                <div id="Open"></div>
+                <div id="ProfitMargin"></div>
+                <div id="DivendendYield"></div>
+                <div id="EPS"></div>
+                <div id="PERatio"></div>
+                <div id="DivendendDate"></div>
+                <div id="exDivendendDate"></div>
+            </div>
         </div>
 
         <script type="module" src="index.js"></script>

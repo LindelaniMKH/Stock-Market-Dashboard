@@ -1,16 +1,34 @@
+:root{
+    --ghost-white: #FBFBFF;
+    --russian-violet: #2F1847;
+    --white: #FCFCFC;
+    --font-color: #303036;
+}
+
 body{
-    background-color: #FCFCFC;
-    color: #303036;
+    background-color: var(--ghost-white);
+    color: var(--font-color);
+    margin: 0;
 }
 
 button{
-    border-radius: 50px;
-    border: none;
     color: gray;
+    border: none;
+}
+
+h2{
+    text-align: center;
+}
+
+#Header{
+    background-color: var(--font-color);
+    height: 7vh;
 }
 
 #Text{
     font-family: Arial, Helvetica, sans-serif;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 #Description{
@@ -20,14 +38,35 @@ button{
 
 #tickerName{
     font-size: 1rem;
-    border-radius: 50px;
     border: none;
-    background-color: rgb(198, 197, 197);
+    background-color: var(--ghost-white);
+    border-radius: 2px;
+}
+
+#SearchBar button{
+    border-radius: 2px;
+}
+
+.ChartDiv{
+    border-style: outset;
+    border-radius: 10px;
+    margin: 8px;
 }
 
 .SearchBarSection{
-    margin: auto;
-    width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.SearchBarSection h2{
+    color: var(--ghost-white);
+    margin-left: 5vh;
+    margin-right: 50vh;
+}
+
+.SearchBarSection div{
+    margin-top: 2vh;
 }
 
 .ChartSection{
@@ -35,13 +74,17 @@ button{
     flex-direction: column;
 }
 
-.Chart{
-    scale: 0.8;
-    padding-top: 0%;
-}
-
 .Container{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
+    max-width: 100vw;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.InfoSection{
+    background-color: var(--font-color);
+    color: var(--ghost-white);
 }

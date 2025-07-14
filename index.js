@@ -7,6 +7,12 @@ const divendendPerShare = document.getElementById("DivendendPerShare");
 const openPrice = document.getElementById("Open");
 const profitMargin = document.getElementById("ProfitMargin");
 const divendendYield = document.getElementById("DivendendYield");
+const eps = document.getElementById("EPS");
+const peRatio = document.getElementById("PERatio");
+const divendendDate = document.getElementById("DivendendDate");
+const exDivendDate = document.getElementById("exDivendendDate");
+const chartSection = document.getElementsByClassName("ChartDiv");
+const infoSection = document.getElementsByClassName("InfoSection");
 const points = 99;
 
 let prices = [];//An array that a given stocks prices
@@ -14,11 +20,13 @@ let dates = [];//An array that holds a given stocks date
 let volume = [];//An array that holds a given stocks volume
 let chart_price = null;
 let chart_volume = null;
+let companyName = null;
 
 searchBarForm.addEventListener("submit", function(event){
     event.preventDefault();
-    fetchData();
-    displayChartData();
+    fetchData().then(() => {
+        displayChartData();
+    });
 });
 
 function fetchData(){
@@ -28,7 +36,8 @@ function fetchData(){
     const timeSerieslink = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}&datatype=json&outputsize=compact`;
     const overview_link = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${userInput}&apikey=${apiKey_nd}`;
 
-    fetch(timeSerieslink)
+    return Promise.all([
+        fetch(timeSerieslink)
         .then(response => {
             if(!response.ok){
                 throw new Error ("HTTPS error, unable to fetch data");
@@ -67,7 +76,7 @@ function fetchData(){
                 //console.log(closingPrice);
             }
             //console.log(timeSeries_arr[0]);
-        });
+        }),
 
         fetch(overview_link)
             .then(request => {
@@ -81,12 +90,20 @@ function fetchData(){
                 profitMargin.textContent = `Profit Margin: ${overview_data["ProfitMargin"]}`;
                 divendendPerShare.textContent = `Divendend Per Share: ${overview_data["DividendPerShare"]}`;
                 divendendYield.textContent = `Divendend Yield: ${overview_data["DividendYield"]}`;
-
+                eps.textContent = `EPS: ${overview_data["EPS"]}`;
+                peRatio.textContent = `PERatio: ${overview_data["PERatio"]}`;
+                divendendDate.textContent = `Divendend Date: ${overview_data["DivendendDate"]}`;
+                exDivendDate.textContent = `ExDivendend Date: ${overview_data["ExDivendendDate"]}`;
+                companyName = toString(overview_data["Name"]).replace(/,?\s*Inc\.?/i, "").trim();
             })
+    ])
+
+    
 }
 
 function displayChartData(){
      Chart.defaults.elements.point.pointStyle = false;
+     Chart.defaults.elements.line.fill = true;
 
     //Destroying the previous charts if they exist
     if(chart_price){
@@ -120,3 +137,26 @@ function displayChartData(){
         }
     });
 }
+
+function showElements(){
+    if(prices.length === 0 && volume.length === 0 && dates.length === 0){
+        for (let el of chartSection){
+            el.style.display = 'none';
+        }
+
+        for (let el of infoSection){
+            el.style.display = 'none';
+        }
+    }
+    else{
+        for (let el of chartSection){
+            el.style.display = "block";
+        }
+
+        for (let el of infoSection){
+            el.style.display = 'block';
+        }
+    }
+}
+
+showElements();
