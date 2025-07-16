@@ -13,6 +13,8 @@ const divendendDate = document.getElementById("DivendendDate");
 const exDivendDate = document.getElementById("exDivendendDate");
 const chartSection = document.getElementsByClassName("ChartDiv");
 const infoSection = document.getElementsByClassName("InfoSection");
+const landingPage = document.getElementById("LandingPage");
+const aboutSection = document.getElementById("AboutSection");
 const points = 99;
 
 let prices = [];//An array that a given stocks prices
@@ -26,6 +28,7 @@ searchBarForm.addEventListener("submit", function(event){
     event.preventDefault();
     fetchData().then(() => {
         displayChartData();
+        showElements();
     });
 });
 
@@ -144,6 +147,9 @@ function showElements(){
             el.style.display = 'none';
         }
 
+        landingPage.style.display = 'block';
+        aboutSection.style.display = 'block';
+
         for (let el of infoSection){
             el.style.display = 'none';
         }
@@ -152,6 +158,9 @@ function showElements(){
         for (let el of chartSection){
             el.style.display = "block";
         }
+
+        landingPage.style.display = 'none';
+        aboutSection.style.display = 'none';
 
         for (let el of infoSection){
             el.style.display = 'block';

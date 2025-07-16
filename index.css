@@ -5,10 +5,19 @@
     --font-color: #303036;
 }
 
+html, body{
+    height: 100%;
+    padding: 0;
+}
+
 body{
     background-color: var(--ghost-white);
     color: var(--font-color);
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
 }
 
 button{
@@ -20,9 +29,23 @@ h2{
     text-align: center;
 }
 
-#Header{
+footer{
+    text-align: center;
+    background-color: var(--font-color);
+    color: var(--ghost-white);
+    margin-top: auto;
+}
+a{
+    color: var(--ghost-white);
+}
+
+header{
     background-color: var(--font-color);
     height: 7vh;
+}
+
+#CallToAction{
+    color: var(--ghost-white);
 }
 
 #Text{
@@ -47,6 +70,25 @@ h2{
     border-radius: 2px;
 }
 
+#LandingPage{
+    margin: auto;
+    width: 25%;
+    text-align: center;
+}
+
+#LandingPage p{
+    color: var(--font-color);
+}
+
+#AboutSection{
+    margin: auto;
+    width: 50vw;
+    text-align: center;
+    background: #f5f5f5;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
 .ChartDiv{
     border-style: outset;
     border-radius: 10px;
@@ -62,11 +104,15 @@ h2{
 .SearchBarSection h2{
     color: var(--ghost-white);
     margin-left: 5vh;
-    margin-right: 50vh;
+    margin-right: 25vh;
 }
 
 .SearchBarSection div{
     margin-top: 2vh;
+}
+
+.SearchBarSection p{
+    margin-right: 10vw;
 }
 
 .ChartSection{

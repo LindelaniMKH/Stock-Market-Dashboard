@@ -7,18 +7,35 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
-        <div id="Header">
+        <main>
+            <header id="Header">
             <div class="SearchBarSection">
                 <h2>TickerTrack</h2>
-                <div>
-                    <form id="SearchBar">
-                        <input type="text" placeholder="Please enter a ticker" id="tickerName">
-                        <button type="submit">Search</button>
-                    </form>
+                <p id="CallToAction">Your all-in-one tool for tracking stocks, visualizing market trends, and staying informed — anytime, anywhere.</p>
+                    <div>
+                        <form id="SearchBar">
+                            <input type="text" placeholder="Please enter a ticker" id="tickerName">
+                            <button type="submit"><img src="Search.png" height="15"></button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </header>
 
+        <section id="LandingPage">
+            <h1>TickerTrack</h1>
+            <p>Your all-in-one tool for tracking stocks, visualizing market trends, and staying informed — anytime, anywhere.</p>
+        </section>
+
+        <section id="AboutSection">
+            <p>
+            TickerTrack is a lightweight stock tracking web app designed for investors, students, and market enthusiasts. 
+            Search any company ticker, view live price and volume charts and analyze key financial metrics — all in one clear, 
+            simple dashboard.
+            </p>
+            <p>📈 Live price & volume charts</p>
+            <p>📰 Company stats</p>
+            <p>⚡ Fast & simple dashboard</p>
+        </section>
 
         <h1 class="Text" id="Ticker"></h1>
 
@@ -28,10 +45,10 @@
 
         <div class="ChartSection">
             <div class="ChartDiv">
-                <canvas class="Chart" id="PriceChart" width="200" height="100"></canvas>
+                <canvas class="Chart" id="PriceChart" width="100" height="30"></canvas>
             </div>
             <div class="ChartDiv">
-                <canvas class="Chart" id="VolumeChart" width="200" height="100"></canvas>
+                <canvas class="Chart" id="VolumeChart" width="100" height="30"></canvas>
             </div>
         </div>
 
@@ -48,7 +65,13 @@
                 <div id="exDivendendDate"></div>
             </div>
         </div>
-
+        </main>
+        
+        <footer>
+            <br/>Made by Lindelani Mkhaliphi<br/>
+            <a href="www.linkedin.com/in/lindelani-mkhaliphi-128484307">LinkedIn</a>
+            <a href="https://github.com/LindelaniMKH">Github</a>
+        </footer>
         <script type="module" src="index.js"></script>
     </body>
 </html>
