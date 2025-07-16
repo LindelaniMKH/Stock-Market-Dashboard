@@ -34,8 +34,6 @@ searchBarForm.addEventListener("submit", function(event){
 
 function fetchData(){
     const userInput = document.getElementById("tickerName").value.toUpperCase().trim();
-    const apiKey = "J3MLMOFOUP0RAV8S";
-    const apiKey_nd = "V4MR2GV2O6G4KI7T";
     const timeSerieslink = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}&datatype=json&outputsize=compact`;
     const overview_link = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${userInput}&apikey=${apiKey_nd}`;
 
